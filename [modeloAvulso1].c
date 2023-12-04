@@ -10,7 +10,7 @@ char string[20] = "hello ran";
   scanf("%s", string);
   printf("%s\n", string);
 
-// alocacao dinamica
+// alocacao dinamicaa
 char* string_dinamica;
 string_dinamica =  (char*) malloc();
 
