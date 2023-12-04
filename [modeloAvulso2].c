@@ -3,7 +3,7 @@
 
 int main(){
 
-// alocacao estatica
+// alocacao estatica, para testes 
 char vetor_estatico[5];
 
   printf("preenchendo vetor estatico...\n");
