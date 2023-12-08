@@ -297,6 +297,52 @@ void removerSessao(sessaoDeFilme **sessoes, int *numeroDeSessoes){
     }
 }
 
+// FUNCAO PARA RESERVAR/COMPRAR LUGAR EM UMA SESSAO ESPECIFICA
+
+void reservarLugar(sessaoDeFilme *sessoes, int numeroDeSessoes){
+    if(numeroDeSessoes == 0){
+        printf("Nenhuma sessao ativa ou cadastrada :/\n");
+        return;
+    }
+
+    int numeroDaSessao;
+    int c;
+
+    // LIMPAR O BUFFER DA ENTRADA ANTES DE LER O NUMERO DA SESSAO
+    while((c = getchar()) != '\n' && c != EOF);
+
+    printf("Digite o numero da sessao desejada: ");
+    while(1){
+        if(scanf("%d", &numeroDaSessao) == 1){
+            break;
+        }else{
+            printf("Entrada invalida. Por favor, insira um numero: ");
+
+            // LIMPAR O BUFFER DA ENTRADA
+            while((c = getchar()) != '\n' && c != EOF);
+        }
+    }
+
+    // VERIFICAR SE O NUMERO DA SESSAO É VÁLIDO
+    int sessaoEncontrada = 0;
+    for(int i = 0; i < numeroDeSessoes; i++){
+        if(sessoes[i].numeroDaSessao == numeroDaSessao){
+            sessaoEncontrada = 1;
+            if (sessoes[i].cadeirasLivres > 0) {
+                sessoes[i].cadeirasLivres--;
+                printf("Lugar reservado com sucesso! :D\n");
+            }else{
+                printf("Desculpe, nao ha lugares livres nesta sessao :(\n");
+            }
+            break;
+        }
+    }
+
+    if(!sessaoEncontrada){
+        printf("Numero de sessao invalido.\n");
+    }
+}
+
 // FUNCAO PRINCIPAL (DE ESCOLHA)
 
 int obterEscolhaUsuario(){
