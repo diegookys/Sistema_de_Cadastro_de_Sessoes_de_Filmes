@@ -6,4 +6,4 @@
 
 Este é um sistema simples de gerenciamento de sessões de filmes em linguagem C, projetado para ser executado no terminal. O sistema permite realizar operações como inserir uma nova sessão, visualizar filmes disponíveis, buscar informações sobre um filme, editar sessões, remover sessões, reservar/comprar lugares em sessões e salvar as informações em um arquivo.
 
-![menu](https://github.com/diegookys/Sistema-de-Cadastro-de-Sessoes-de-Filmes/assets/133829130/55a18952-4cb3-4246-9fb5-83f2d226380e)
+![menu](https://github.com/diegookys/Sistema_de_Cadastro_de_Sessoes_de_Filmes/assets/133829130/23371988-a1e3-4198-a7f9-b24a425d873e)
