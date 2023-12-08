@@ -363,25 +363,6 @@ void salvarEmArquivo(sessaoDeFilme *sessoes, int numeroDeSessoes){
     printf("Informacoes salvas em sessoes.txt\n");
 }
 
-// FUNCAO PRINCIPAL (DE ESCOLHA)
-
-int obterEscolhaUsuario(){
-    int escolha;
-    printf("Escolha uma opcao: ");
-
-    while(1){
-        if(scanf("%d", &escolha) != 1 || escolha < 1 || escolha > 8){
-            printf("Opcao invalida. Tente novamente: ");
-            // LIMPAR O BUFFER DA ENTRADA
-            while (getchar() != '\n');
-        }else{
-            break;
-        }
-    }
-
-    return escolha;
-}
-
 int main(){
     sessaoDeFilme *sessoes = NULL;
     int numeroDeSessoes = 0;
