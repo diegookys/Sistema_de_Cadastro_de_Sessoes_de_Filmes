@@ -182,3 +182,51 @@ void buscarFilme(sessaoDeFilme *sessoes, int numeroDeSessoes){
         printf("Nenhum horario para '%s' encontrado.\n", pesquisarFilme);
     }
 }
+
+// FUNÇÃO PARA REMOVER SESSÃO JÁ CADASTRADA
+
+void removerSessao(sessaoDeFilme **sessoes, int *numeroDeSessoes){
+    if(*numeroDeSessoes == 0){
+        printf("Nenhuma sessao cadastrada.\n");
+        return;
+    }
+
+    int numeroDaSessao;
+    int c;
+
+    while((c = getchar()) != '\n' && c != EOF);
+
+    printf("Digite o numero da sessao que deseja remover: ");
+    while(1){
+        if(scanf("%d", &numeroDaSessao) == 1){
+            break;
+        }else{
+            printf("Entrada invalida. Por favor, insira um numero: ");
+
+            // LIMPAR O BUFFER DA ENTRADA
+            while ((c = getchar()) != '\n' && c != EOF);
+        }
+    }
+
+    int sessaoEncontrada = 0;
+    for(int i = 0; i < *numeroDeSessoes; i++){
+        if((*sessoes)[i].numeroDaSessao == numeroDaSessao){
+            sessaoEncontrada = 1;
+
+            // REMOVER SESSAO, MOVENDO AS SESSOES POSTERIORES UMA POSICAO PARA TRAS
+
+            for(int j = i; j < *numeroDeSessoes - 1; j++){
+                (*sessoes)[j] = (*sessoes)[j + 1];
+            }
+            break;
+        }
+    }
+
+    if(sessaoEncontrada){
+        (*numeroDeSessoes)--;
+        *sessoes = (sessaoDeFilme *)realloc(*sessoes, (*numeroDeSessoes) * sizeof(sessaoDeFilme));
+        printf("Sessao removida com sucesso! :D\n");
+    }else{
+        printf("Numero de sessao invalido.\n");
+    }
+}
