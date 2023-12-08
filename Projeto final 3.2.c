@@ -126,3 +126,59 @@ void inserirSessao(sessaoDeFilme **sessoes, int *numeroDeSessoes){
 
     printf("Sessao cadastrada com sucesso!:D\n");
 }
+
+// FUNCAO PARA MOSTRAR FILMES DISPONIVEIS E SUAS SESSOES
+
+void mostrarFilmes(sessaoDeFilme *sessoes, int numeroDeSessoes){
+    if(numeroDeSessoes == 0){
+        printf("Nenhum filme esta cadastrado.\n");
+        return;
+    }
+
+    printf("\nFilmes disponiveis:\n");
+    for(int i = 0; i < numeroDeSessoes; i++){
+        printf("Sessao %d. Filme: %s - %s\n", sessoes[i].numeroDaSessao, sessoes[i].filme, sessoes[i].horario);
+    }
+}
+
+// FUNCAO PARA BUSCAR PELO NOME DO FILME E MOSTRA TBM HORARIO DAS SESSOES
+
+void buscarFilme(sessaoDeFilme *sessoes, int numeroDeSessoes){
+    if(numeroDeSessoes == 0){
+        printf("Nenhum filme cadastrado.\n");
+        return;
+    }
+
+    char pesquisarFilme[50];
+    
+    // LIMPA O BUFFER DA ENTRADA ANTES DE LER O NOME DO FILME
+    
+    while (getchar() != '\n');
+    printf("Digite o nome do filme: ");
+    
+    // FGETS PARA LER TODA A LINHA
+
+    fgets(pesquisarFilme, sizeof(pesquisarFilme), stdin);
+    
+    // REMOVER QUEBRA DE LINHA NO FINAL
+
+    pesquisarFilme[strcspn(pesquisarFilme, "\n")] = '\0';
+
+    // VARIAVEL BOOLEANA PARA VERIFICAR SE PELO MENOS UM HORARIO FOI ENCONTRADO
+
+    int horarioEncontrado = 0;
+
+    printf("\nSessoes e Horarios disponiveis para %s:\n", pesquisarFilme);
+    for(int i = 0; i < numeroDeSessoes; i++){
+       if(strcmp(sessoes[i].filme, pesquisarFilme) == 0){
+        printf("Sessao %d. Horario - %s\n", sessoes[i].numeroDaSessao, sessoes[i].horario);
+        horarioEncontrado = 1;  // PELO MENOS UM HORARIO FOI ACHADO
+    }
+    }
+
+    // EXIBE A MENSAGEM ADEQUADA COM BASE NA variável horarioEncontrado
+    
+    if(!horarioEncontrado){
+        printf("Nenhum horario para '%s' encontrado.\n", pesquisarFilme);
+    }
+}
