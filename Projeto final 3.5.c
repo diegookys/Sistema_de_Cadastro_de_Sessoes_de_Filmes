@@ -183,6 +183,72 @@ void buscarFilme(sessaoDeFilme *sessoes, int numeroDeSessoes){
     }
 }
 
+// FUNCAO PARA EDITAR INFORMACOES DA SESSAO JA CADASTRADA
+
+void editarSessao(sessaoDeFilme *sessoes, int numeroDeSessoes){
+    if(numeroDeSessoes == 0){
+        printf("Nenhuma sessao cadastrada.\n");
+        return;
+    }
+    
+    int numeroDaSessao;
+    int c;
+
+    while ((c = getchar()) != '\n' && c != EOF);
+    
+    printf("Digite o numero da sessao que deseja editar: ");
+ 
+    while(1){
+        if(scanf("%d", &numeroDaSessao) == 1){
+            break;
+        }else{
+            printf("Entrada invalida. Por favor, insira um numero: ");
+
+            // LIMPAR O BUFFER DA ENTRADA
+            while ((c = getchar()) != '\n' && c != EOF);
+        }
+    }
+
+    int indiceSessao = -1;  // INICIALIZA O ÍNDICE COM -1 (INVÁLIDO)
+
+    // PROCURA O ÍNDICE DA SESSAO COM BASE NO NUMERO FORNECIDO
+
+    for(int i = 0; i < numeroDeSessoes; i++){
+        if(sessoes[i].numeroDaSessao == numeroDaSessao){
+            indiceSessao = i;
+            break;
+        }
+    }
+
+    if(indiceSessao != -1){
+        do{
+            printf("Novo horario da sessao (HH:MM): ");     // NOVO HORARIO EDITAVEL
+            scanf("%s", sessoes[indiceSessao].horario);
+
+            // VERIFICA SE O NOVO HORARIO É VÁLIDO
+
+            if(!validarHorario(sessoes[indiceSessao].horario)){
+                printf("Erro: O horario deve seguir o formato HH:MM e ser valido. Tente novamente.\n");
+            }
+        } while(!validarHorario(sessoes[indiceSessao].horario));
+
+        do{
+            printf("Nova quantidade de cadeiras totais (1-120): ");  // NOVA QUANTIDADE DE CADEIRAS (1-120)
+            scanf("%d", &sessoes[indiceSessao].totalDeCadeiras);
+
+            if(sessoes[indiceSessao].totalDeCadeiras > 120 || sessoes[indiceSessao].totalDeCadeiras <= 0){
+                printf("Limite excedido ou valor invalido. Por favor, escolha um valor entre 1 e 120!\n");
+            }
+        } while(sessoes[indiceSessao].totalDeCadeiras > 120 || sessoes[indiceSessao].totalDeCadeiras <= 0);
+
+        sessoes[indiceSessao].cadeirasLivres = sessoes[indiceSessao].totalDeCadeiras;
+
+        printf("Sessao editada com sucesso!\n");
+    }else{
+        printf("Numero de sessao invalido.\n");
+    }
+}
+
 // FUNÇÃO PARA REMOVER SESSÃO JÁ CADASTRADA
 
 void removerSessao(sessaoDeFilme **sessoes, int *numeroDeSessoes){
