@@ -315,3 +315,44 @@ int obterEscolhaUsuario(){
 
     return escolha;
 }
+
+int main(){
+    sessaoDeFilme *sessoes = NULL;
+    int numeroDeSessoes = 0;
+    int opcao;
+
+    do{
+        printf("\nMenu:\n");
+        printf("1. Cadastrar uma nova sessao de um filme\n");
+        printf("2. Mostrar filmes disponiveis e suas sessoes\n");
+        printf("3. Buscar por um filme pelo nome\n");
+        printf("4. Editar informacoes da sessao\n");
+        printf("5. Remover sessao\n");
+        printf("6. Reservar ou comprar lugar em uma sessao especifica\n");
+        printf("7. Salvar informacoes das sessoes em um arquivo (.txt)\n");
+        printf("8. Sair do menu\n");
+
+        opcao = obterEscolhaUsuario();
+
+        switch(opcao){
+            case 1: inserirSessao(&sessoes, &numeroDeSessoes); break;
+            case 2: mostrarFilmes(sessoes, numeroDeSessoes); break;
+            case 3: buscarFilme(sessoes, numeroDeSessoes); break;
+            case 4: editarSessao(sessoes, numeroDeSessoes); break;
+            case 5: removerSessao(&sessoes, &numeroDeSessoes); break;
+            case 6: reservarLugar(sessoes, numeroDeSessoes); break;
+            case 7: salvarEmArquivo(sessoes, numeroDeSessoes); break;
+            case 8:
+                printf("Saindo do programa...\n");
+                break;
+            default:
+                printf("Opcao invalida. Tente novamente.\n");
+        }
+
+    } while(opcao != 8);
+
+    // LIBERA A MEMORIA ALOCADA DINAMICAMENTE
+    free(sessoes);
+
+    return 0;
+}
