@@ -296,3 +296,22 @@ void removerSessao(sessaoDeFilme **sessoes, int *numeroDeSessoes){
         printf("Numero de sessao invalido.\n");
     }
 }
+
+// FUNCAO PRINCIPAL (DE ESCOLHA)
+
+int obterEscolhaUsuario(){
+    int escolha;
+    printf("Escolha uma opcao: ");
+
+    while(1){
+        if(scanf("%d", &escolha) != 1 || escolha < 1 || escolha > 8){
+            printf("Opcao invalida. Tente novamente: ");
+            // LIMPAR O BUFFER DA ENTRADA
+            while (getchar() != '\n');
+        }else{
+            break;
+        }
+    }
+
+    return escolha;
+}
