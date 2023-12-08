@@ -343,6 +343,26 @@ void reservarLugar(sessaoDeFilme *sessoes, int numeroDeSessoes){
     }
 }
 
+// FUNCAO PARA SALVAR INFORMAÇÕES DAS SESSOES EM UM ARQUIVO
+
+void salvarEmArquivo(sessaoDeFilme *sessoes, int numeroDeSessoes){
+    FILE *arquivo = fopen("sessoes.txt", "w");
+
+    if(arquivo == NULL){
+        printf("Erro ao abrir o arquivo. \n");
+        return;
+    }
+
+    for(int i = 0; i < numeroDeSessoes; i++){
+        fprintf(arquivo, "%s;%s;%d;%d\n", sessoes[i].filme, sessoes[i].horario,
+                sessoes[i].totalDeCadeiras, sessoes[i].cadeirasLivres);
+    }
+
+    fclose(arquivo);
+
+    printf("Informacoes salvas em sessoes.txt\n");
+}
+
 // FUNCAO PRINCIPAL (DE ESCOLHA)
 
 int obterEscolhaUsuario(){
